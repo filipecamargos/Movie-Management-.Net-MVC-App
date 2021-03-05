@@ -19,18 +19,41 @@ namespace MvcMovie.Controllers
             _context = context;
         }
 
-        // GET: Movies
-        public async Task<IActionResult> Index(string searchString)
+         // GET: Movies
+        public async Task<IActionResult> Index(string movieGenre, string searchString)
         {
-            var movies = from m in _context.Movie
-                         select m;
+            // Use LINQ to get list of genres.
+            IQueryable<string> genreQuery = from m in _context.Movie
+                                            orderby m.Genre
+                                            select m.Genre;
 
-            if (!String.IsNullOrEmpty(searchString))
+            var movies = from m in _context.Movie
+                            select m;
+
+            if (!string.IsNullOrEmpty(searchString) && !(movieGenre.Equals("Date")))
             {
                 movies = movies.Where(s => s.Title.Contains(searchString));
             }
 
-            return View(await movies.ToListAsync());
+            if (!string.IsNullOrEmpty(movieGenre) && !(movieGenre.Equals("Date")))
+            {
+                movies = movies.Where(x => x.Genre == movieGenre);
+            }
+
+            //Search by release date
+            if(!string.IsNullOrEmpty(movieGenre) && movieGenre.Equals("Date"))
+            {
+                movies = movies.OrderBy(s => s.ReleaseDate);
+            }
+
+            var movieGenreVM = new MovieGenreViewModel
+            {
+                Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                Movies = await movies.ToListAsync()
+            };
+
+            return View(movieGenreVM);
+
         }
 
         // GET: Movies/Details/5
