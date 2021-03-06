@@ -83,11 +83,17 @@ namespace MvcMovie.Controllers
                                            orderby m.GenreType
                                            select m.GenreType;
 
-            //Allow the drop box logic to go to the view
+            //Allow the drop box logic to go to the view for gener
             var genreViewOption = genreType.ToList<String>();
             SelectList GenresTypes = new SelectList(genreViewOption);
 
+            //List for the Rating
+            string[] rating = new string[] { "G", "PG", "PG13" };
+            SelectList ratingTypes = new SelectList(rating);
+
+
             ViewBag.types = GenresTypes;
+            ViewBag.rating = ratingTypes;
 
             return View();
         }
@@ -97,7 +103,7 @@ namespace MvcMovie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -131,7 +137,13 @@ namespace MvcMovie.Controllers
             var genreViewOption = genreType.ToList<String>();
             SelectList GenresTypes = new SelectList(genreViewOption);
 
+            //List for the Rating
+            string[] rating = new string[] { "G", "PG", "PG13" };
+            SelectList ratingTypes = new SelectList(rating);
+
+
             ViewBag.types = GenresTypes;
+            ViewBag.rating = ratingTypes;
 
             return View(movie);
         }
@@ -141,7 +153,7 @@ namespace MvcMovie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             if (id != movie.Id)
             {
