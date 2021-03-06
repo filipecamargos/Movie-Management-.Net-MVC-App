@@ -8,10 +8,12 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <header style="background-color: #e7f1e4; padding: 2px; border-radius: 2px">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom">
             <div class="container">
-                <a class="navbar-brand" asp-controller="Movies" asp-action="Index">Movie App</a>
+                <a class="navbar-brand" asp-controller="Movies" asp-action="Index">
+                    <img id="logoTop" src="~/img/topLogo.png" alt="Logo">
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,7 +37,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="background-color: #e7f1e4; padding: 2px;">
         <div class="container">
             &copy; 2021 - Developer: Filipe - ID, USA
         </div>
