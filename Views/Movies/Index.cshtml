@@ -4,23 +4,21 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<hr style="margin-top: 25px" />
+<h2>Movie Management</h2>
+<hr style="margin-bottom: 15px"/>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-outline-info">Create New</a>
 </p>
-<form asp-controller="Movies" asp-action="Index" method="get">
-    <p>
-        Sort By:
-        <select asp-for="MovieGenre" asp-items="Model.Genres">
-            <option value="" disabled selected>Select</option>
-            <option value="">All</option>
-            <option value="Date">Date</option>
-        </select>
-
-        Title: <input type="text" asp-for="SearchString" />
-        <input type="submit" value="Filter" />
-    </p>
+<form asp-controller="Movies" asp-action="Index" method="get" style="display: flex; margin-bottom: 15px">
+    <select asp-for="MovieGenre" asp-items="Model.Genres" class="form-control" style="width: 120px">
+        <option value="" disabled selected>Sort By</option>
+        <option value="">All</option>
+        <option value="Date">Date</option>
+    </select>
+    <input placeholder="Search in Title" type="text" asp-for="SearchString" class="form-control" style="width: 150px; margin-left: 12px" />
+    <input type="submit" value="Filter" class="btn btn-outline-success" style="margin-left: 5px;"/>
 </form>
 
 <table class="table">
