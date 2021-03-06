@@ -10,8 +10,8 @@ using MvcMovie.Data;
 namespace MvcMovie.Migrations
 {
     [DbContext(typeof(MvcMovieContext))]
-    [Migration("20210305173830_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210305212132_genre15524")]
+    partial class genre15524
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,21 @@ namespace MvcMovie.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("MvcMovie.Models.Genre", b =>
+                {
+                    b.Property<int>("GenreID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("GenreType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("GenreID");
+
+                    b.ToTable("Genre");
+                });
 
             modelBuilder.Entity("MvcMovie.Models.Movie", b =>
                 {

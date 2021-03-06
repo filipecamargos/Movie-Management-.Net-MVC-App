@@ -13,6 +13,7 @@ namespace MvcMovie.Controllers
     public class MoviesController : Controller
     {
         private readonly MvcMovieContext _context;
+        public SelectList GenresTypes;
 
         public MoviesController(MvcMovieContext context)
         {
@@ -77,6 +78,17 @@ namespace MvcMovie.Controllers
         // GET: Movies/Create
         public IActionResult Create()
         {
+            // Use LINQ to get list of types of genres.
+            IQueryable<String> genreType = from m in _context.Genre
+                                           orderby m.GenreType
+                                           select m.GenreType;
+
+            //Allow the drop box logic to go to the view
+            var genreViewOption = genreType.ToList<String>();
+            SelectList GenresTypes = new SelectList(genreViewOption);
+
+            ViewBag.types = GenresTypes;
+
             return View();
         }
 
@@ -109,6 +121,18 @@ namespace MvcMovie.Controllers
             {
                 return NotFound();
             }
+
+            // Use LINQ to get list of types of genres.
+            IQueryable<String> genreType = from m in _context.Genre
+                                           orderby m.GenreType
+                                           select m.GenreType;
+
+            //Allow the drop box logic to go to the view
+            var genreViewOption = genreType.ToList<String>();
+            SelectList GenresTypes = new SelectList(genreViewOption);
+
+            ViewBag.types = GenresTypes;
+
             return View(movie);
         }
 

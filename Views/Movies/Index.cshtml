@@ -13,6 +13,7 @@
     <p>
         Sort By:
         <select asp-for="MovieGenre" asp-items="Model.Genres">
+            <option value="" disabled selected>Select</option>
             <option value="">All</option>
             <option value="Date">Date</option>
         </select>
