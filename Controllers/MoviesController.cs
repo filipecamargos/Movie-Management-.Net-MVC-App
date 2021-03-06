@@ -78,22 +78,9 @@ namespace MvcMovie.Controllers
         // GET: Movies/Create
         public IActionResult Create()
         {
-            // Use LINQ to get list of types of genres.
-            IQueryable<String> genreType = from m in _context.Genre
-                                           orderby m.GenreType
-                                           select m.GenreType;
 
-            //Allow the drop box logic to go to the view for gener
-            var genreViewOption = genreType.ToList<String>();
-            SelectList GenresTypes = new SelectList(genreViewOption);
-
-            //List for the Rating
-            string[] rating = new string[] { "G", "PG", "PG13" };
-            SelectList ratingTypes = new SelectList(rating);
-
-
-            ViewBag.types = GenresTypes;
-            ViewBag.rating = ratingTypes;
+            ViewBag.types = getGenreTypes();
+            ViewBag.rating = getMovieRating();
 
             return View();
         }
@@ -128,22 +115,8 @@ namespace MvcMovie.Controllers
                 return NotFound();
             }
 
-            // Use LINQ to get list of types of genres.
-            IQueryable<String> genreType = from m in _context.Genre
-                                           orderby m.GenreType
-                                           select m.GenreType;
-
-            //Allow the drop box logic to go to the view
-            var genreViewOption = genreType.ToList<String>();
-            SelectList GenresTypes = new SelectList(genreViewOption);
-
-            //List for the Rating
-            string[] rating = new string[] { "G", "PG", "PG13" };
-            SelectList ratingTypes = new SelectList(rating);
-
-
-            ViewBag.types = GenresTypes;
-            ViewBag.rating = ratingTypes;
+            ViewBag.types = getGenreTypes();
+            ViewBag.rating = getMovieRating();
 
             return View(movie);
         }
@@ -215,6 +188,32 @@ namespace MvcMovie.Controllers
         private bool MovieExists(int id)
         {
             return _context.Movie.Any(e => e.Id == id);
+        }
+
+        //Private method to get the list of GenreTypes
+        private SelectList getGenreTypes()
+        {
+            // Use LINQ to get list of types of genres.
+            IQueryable<String> genreType = from m in _context.Genre
+                                           orderby m.GenreType
+                                           select m.GenreType;
+
+            //Allow the drop box logic to go to the view
+            var genreViewOption = genreType.ToList<String>();
+            SelectList GenresTypes = new SelectList(genreViewOption);
+
+            return GenresTypes;
+        }
+
+        //Private set the SELECT LIST for moving rating
+        private SelectList getMovieRating()
+        {
+            //List for the Rating
+            string[] rating = new string[] { "G", "PG", "PG13" };
+            SelectList ratingTypes = new SelectList(rating);
+
+            return ratingTypes;
+
         }
     }
 }
