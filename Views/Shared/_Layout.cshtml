@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Gospel Movies</title>
+    <link rel="icon" href="~/img/Logo Front.png" type="image/x-icon">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -11,7 +12,7 @@
     <header style="background-color: #e7f1e4; padding: 2px; border-radius: 2px">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom">
             <div class="container">
-                <a class="navbar-brand" asp-controller="Movies" asp-action="Index">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
                     <img id="logoTop" src="~/img/topLogo.png" alt="Logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -21,10 +22,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="Index">Movie Adm</a>
+                            <a class="nav-link text-dark" asp-controller="Movies" asp-action="Index">Movie Adm</a>
                         </li>
                     </ul>
                 </div>
